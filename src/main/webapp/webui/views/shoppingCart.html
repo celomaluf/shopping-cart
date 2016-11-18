@@ -1,0 +1,114 @@
+<div ng-include="'webui/views/common/header.html'"></div>
+
+<div class="container" >
+
+	<!-- #########################################################################  -->
+	<!-- ######################### SHOPPING CART #################################  -->
+	<!-- #########################################################################  -->
+	<div ng-hide="commerceItems.length == 0" class="row">
+		<div class="col-sm-12 col-md-10 col-md-offset-1 text-center">
+			<h1>Shopping Cart</h1>
+			<h1>&nbsp;</h1>
+			<table class="table table-hover" class"{commerceItems.length==0 ? hidden}">
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>Quantity</th>
+						<th class="text-center">Price</th>
+						<th class="text-center">SubTotal</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>				
+				<tbody ng-repeat="commerceItem in commerceItems track by commerceItem.id" >
+					<tr>
+						<td class="col-sm-8 col-md-6">
+							<div class="media">
+								<a class="thumbnail pull-left" > 
+									<img class="media-object" ng-src="{{commerceItem.product.image}}" style="width: 72px; height: 72px;">
+								</a>
+								<div class="media-body">
+									<h4 class="media-heading">
+										{{commerceItem.product.name}}
+									</h4>			
+								</div>
+							</div>
+						</td>
+						<td class="col-sm-1 col-md-1" style="text-align: center">
+							<input type="text" class="form-control" ng-disabled="true" value="{{commerceItem.quantity}}"></td>
+						<td class="col-sm-1 col-md-2 text-center"><strong>{{commerceItem.product.price | currency : 'US$ '}}</strong></td>
+						<td class="col-sm-1 col-md-2 text-center"><strong>{{commerceItem.amount  | currency : 'US$ '}}</strong></td>
+						<td class="col-sm-1 col-md-1">
+							<button type="button" class="btn btn-danger" ng-click="app.shoppingcartItemsIdDelete(commerceItem)">
+								Remove
+							</button>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td class="text-right">
+							<h4>Total</h4>
+						</td>
+						<td class="text-right col-md-2" >
+							<h4>
+								<strong>{{getCartTotal() | currency : 'US$ '}}</strong>
+							</h4>
+						</td>
+							
+					</tr>	
+				</tfoot>
+			</table>
+		</div>
+	</div>
+
+	
+	<!-- #########################################################################  -->
+	<!-- ######################### SHOW CASE #####################################  -->
+	<!-- #########################################################################  -->
+	<div class="row">
+		<div class="col-sm-12 col-md-10 col-md-offset-1  text-center">
+			<h1>ShowCase</h1>
+			<h1>&nbsp;</h1>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>Quantity</th>
+						<th class="text-center">Price</th>
+						<th class="text-center"></th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+
+				<tbody ng-repeat="product in showCase track by $index">
+					<tr>
+						<td class="col-sm-8 col-md-6">
+							<div class="media">
+								<a class="thumbnail pull-left" > 
+									<img class="media-object" ng-src="{{product.image}}" style="width: 72px; height: 72px;">
+								</a>
+								<div class="media-body">
+									<h4 class="media-heading">
+										{{product.name}}
+									</h4>
+								</div>
+							</div>
+						</td>
+						<td class="col-sm-1 col-md-1" style="text-align: center">
+							<input type="number" ng-model="quantity" class="form-control" id="quantity_{{$index}}"></td>
+						<td class="col-sm-1 col-md-1 text-center"><strong>{{product.price | currency : 'US$ '}}</strong></td>
+						<td class="col-sm-1 col-md-1 text-center">&nbsp;</td>
+						<td class="col-sm-1 col-md-1">
+							<button type="button" class="btn" ng-disabled="!(!!quantity && quantity > 0)" ng-click="app.shoppingcartItemsPost(product.id, $index)" >
+								Add to Cart
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div ng-include="'webui/views/common/footer.html'"></div>
+</div>
