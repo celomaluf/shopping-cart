@@ -1,2 +1,4 @@
-# shopping-cart
-Java 8, Spring MVC, Maven REST, AngularJS, Bootstrap
+INSTALLATION
+
+Run "Update project..." on the project
+It's recommended to deploy the sample in Tomcat 9
