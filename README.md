@@ -1,4 +1,4 @@
-INSTALLATION
+# INSTALLATION
 
-Run "Update project..." on the project
-It's recommended to deploy the sample in Tomcat 9
+1. Run "Update project..." on the project
+2. It's recommended to deploy the sample in Tomcat 9
